@@ -42,17 +42,13 @@ const handleSubmit = async (e) => {
     console.log("Processing prediction request...");
     
     try {
-        console.log("Form data being sent:", form);
-        
         const response = await axios({
             method: 'post',
             url: `${process.env.REACT_APP_API_URL}/predict`,
             data: form,
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            withCredentials: false  // Add this
+                'Content-Type': 'application/json'
+            }
         });
         
         if (response.data && response.data.prediction) {
@@ -68,9 +64,8 @@ const handleSubmit = async (e) => {
         }
         
     } catch (error) {
-        console.error("Full error:", error);
-        console.error("Server response:", error.response?.data);
-        alert(`Prediction failed: ${error.response?.data?.error || error.message}`);
+        console.error("Prediction failed:", error.message);
+        alert("Unable to make prediction. Please try again.");
     }    
 };
   const fieldInfo = {
