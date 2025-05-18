@@ -1,5 +1,5 @@
 
-# ❤️ Heart Disease Prediction Web App
+# ❤️ Heart Failure Risk Prediction Web App
 
 A fully responsive, theme-switching, animated web application to **predict heart disease risk** using a trained deep learning model. Built with **React.js** (frontend) and **Flask** (backend), this app provides a smooth user experience across all devices.
 
