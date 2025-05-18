@@ -37,49 +37,69 @@ export default function Predict() {
     setForm({ ...form, [name]: value });
   };
 
- const API_URL = 'https://hfailure-backend-1.onrender.com';
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-      const res = await axios({
-          method: 'post',
-          url: `${API_URL}/predict`,
-          data: form,
-          headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-          },
-          withCredentials: false
-      });
-      
-      const predictionData = res.data;
-      setResult(predictionData);
 
-      await addDoc(collection(db, "predictions"), {
-          ...form,
-          prediction: predictionData.prediction,
-          probability: predictionData.probability,
-          timestamp: serverTimestamp(),
-      });
-  } catch (err) {
-      console.error("Prediction error:", err);
-      if (err.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          console.error("Error response:", err.response.data);
-          alert(`Prediction failed: ${err.response.data.error || 'Unknown error'}\nStatus: ${err.response.status}`);
-      } else if (err.request) {
-          // The request was made but no response was received
-          console.error("No response received:", err.request);
-          alert("No response from server. Please try again later.");
-      } else {
-          // Something happened in setting up the request that triggered an Error
-          console.error("Error setting up request:", err.message);
-          alert("Error setting up request. Please try again later.");
-      }
-  }
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Log the form data being sent
+    console.log("Submitting form data:", form);
+    console.log("API URL:", process.env.REACT_APP_API_URL); // Debug log for API URL
+    
+    try {
+        const response = await axios({
+            method: 'post',
+            url: `${process.env.REACT_APP_API_URL}/predict`,
+            data: form,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Origin': 'https://heart-failure.toshankanwar.website'
+            },
+            withCredentials: false,
+            timeout: 10000 // 10 second timeout
+        });
+        
+        console.log("Server response:", response.data);
+        
+        const predictionData = response.data;
+        setResult(predictionData);
+
+        // Store prediction in Firebase
+        await addDoc(collection(db, "predictions"), {
+            ...form,
+            prediction: predictionData.prediction,
+            probability: predictionData.probability,
+            timestamp: serverTimestamp(),
+        });
+    } catch (err) {
+        console.error("Full error object:", err);
+        console.error("API URL used:", `${process.env.REACT_APP_API_URL}/predict`); // Debug log for failed requests
+        
+        if (err.response) {
+            // Server responded with error
+            console.error("Server error response:", {
+                data: err.response.data,
+                status: err.response.status,
+                headers: err.response.headers
+            });
+            alert(`Server error: ${err.response.data.error || 'Unknown error'} (Status: ${err.response.status})`);
+        } else if (err.request) {
+            // Request made but no response
+            console.error("No response received:", err.request);
+            alert("No response from server. The service might be down or blocked by CORS policy.");
+        } else {
+            // Error in request setup
+            console.error("Request setup error:", err.message);
+            alert(`Error setting up request: ${err.message}`);
+        }
+    }
 };
+
+
+
+  
   const fieldInfo = {
     Age: {
       description: "Patient's age in years",
