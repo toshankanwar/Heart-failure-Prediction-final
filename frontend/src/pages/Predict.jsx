@@ -39,13 +39,9 @@ export default function Predict() {
 
 
 
-  
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Log the form data being sent
     console.log("Submitting form data:", form);
-    console.log("API URL:", process.env.REACT_APP_API_URL); // Debug log for API URL
     
     try {
         const response = await axios({
@@ -54,49 +50,35 @@ export default function Predict() {
             data: form,
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Origin': 'https://heart-failure.toshankanwar.website'
+                'Accept': 'application/json'
+                // Remove the 'Origin' header - it will be set automatically by the browser
             },
-            withCredentials: false,
-            timeout: 10000 // 10 second timeout
+            // Increase timeout for slower connections
+            timeout: 30000, // 30 seconds
+            // Remove withCredentials since we're not using cookies
+            withCredentials: false
         });
         
         console.log("Server response:", response.data);
-        
         const predictionData = response.data;
         setResult(predictionData);
-
-        // Store prediction in Firebase
-        await addDoc(collection(db, "predictions"), {
-            ...form,
-            prediction: predictionData.prediction,
-            probability: predictionData.probability,
-            timestamp: serverTimestamp(),
-        });
-    } catch (err) {
-        console.error("Full error object:", err);
-        console.error("API URL used:", `${process.env.REACT_APP_API_URL}/predict`); // Debug log for failed requests
         
-        if (err.response) {
-            // Server responded with error
-            console.error("Server error response:", {
-                data: err.response.data,
-                status: err.response.status,
-                headers: err.response.headers
-            });
+        // ... rest of your code ...
+        
+    } catch (err) {
+        // Improved error handling
+        if (err.code === 'ECONNABORTED') {
+            alert("Request timed out. Please try again. If the problem persists, the server might be overloaded.");
+        } else if (err.response) {
             alert(`Server error: ${err.response.data.error || 'Unknown error'} (Status: ${err.response.status})`);
         } else if (err.request) {
-            // Request made but no response
-            console.error("No response received:", err.request);
-            alert("No response from server. The service might be down or blocked by CORS policy.");
+            alert("Unable to reach the server. Please check your internet connection.");
         } else {
-            // Error in request setup
-            console.error("Request setup error:", err.message);
-            alert(`Error setting up request: ${err.message}`);
+            alert(`Error: ${err.message}`);
         }
+        console.error("API Error:", err);
     }
 };
-
 
 
   
