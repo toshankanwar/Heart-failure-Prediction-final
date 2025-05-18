@@ -44,6 +44,9 @@ export default function Predict() {
     console.log("Submitting form data:", form);
     
     try {
+        // Show loading state
+        setIsLoading(true);  // Add this state variable
+        
         const response = await axios({
             method: 'post',
             url: `${process.env.REACT_APP_API_URL}/predict`,
@@ -51,35 +54,45 @@ export default function Predict() {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-                // Remove the 'Origin' header - it will be set automatically by the browser
             },
-            // Increase timeout for slower connections
-            timeout: 30000, // 30 seconds
-            // Remove withCredentials since we're not using cookies
-            withCredentials: false
+            timeout: 120000, // Increase timeout to 60 seconds
+            withCredentials: false,
+            // Add retry logic
+            retry: 3,
+            retryDelay: (retryCount) => {
+                return retryCount * 2000; // Wait 2s, 4s, 6s between retries
+            }
         });
         
         console.log("Server response:", response.data);
         const predictionData = response.data;
         setResult(predictionData);
         
-        // ... rest of your code ...
+        // Store prediction in Firebase
+        await addDoc(collection(db, "predictions"), {
+            ...form,
+            prediction: predictionData.prediction,
+            probability: predictionData.probability,
+            timestamp: serverTimestamp(),
+        });
         
     } catch (err) {
-        // Improved error handling
-        if (err.code === 'ECONNABORTED') {
-            alert("Request timed out. Please try again. If the problem persists, the server might be overloaded.");
-        } else if (err.response) {
-            alert(`Server error: ${err.response.data.error || 'Unknown error'} (Status: ${err.response.status})`);
-        } else if (err.request) {
-            alert("Unable to reach the server. Please check your internet connection.");
-        } else {
-            alert(`Error: ${err.message}`);
-        }
         console.error("API Error:", err);
+        
+        if (err.code === 'ECONNABORTED') {
+            alert("The server is taking longer than expected to respond. Please try again in a few moments.");
+        } else if (err.response) {
+            const errorMessage = err.response.data.error || 'Unknown server error';
+            alert(`The server returned an error: ${errorMessage}`);
+        } else if (err.request) {
+            alert("Unable to reach the server. Please check your internet connection and try again.");
+        } else {
+            alert("An unexpected error occurred. Please try again.");
+        }
+    } finally {
+        setIsLoading(false);  // Clear loading state
     }
 };
-
 
   
   const fieldInfo = {
