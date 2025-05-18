@@ -38,50 +38,41 @@ export default function Predict() {
   };
 
 
-
 const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting form data:", form);
+    console.log("Processing prediction request...");
     
     try {
-        setIsLoading(true);  
-        setError(null);      
+        // Show loading state
+        setIsLoading(true);
         
+        // Make API call
         const response = await axios({
             method: 'post',
             url: `${process.env.REACT_APP_API_URL}/predict`,
             data: form,
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            // Remove timeout completely since we're handling long predictions
-            withCredentials: false
+                'Content-Type': 'application/json'
+            }
         });
         
-        console.log("Server response:", response.data);
-        const predictionData = response.data;
-        setResult(predictionData);
-        
-        // Store prediction in Firebase
-        await addDoc(collection(db, "predictions"), {
-            ...form,
-            prediction: predictionData.prediction,
-            probability: predictionData.probability,
-            timestamp: serverTimestamp(),
-        });
-        
-    } catch (err) {
-        console.error("API Error:", err);
-        setError(err.message);
-        
-        if (err.response) {
-            alert(`Server error: ${err.response.data.error || 'Unknown error'}`);
-        } else if (err.request) {
-            alert("Connection issue. Please try again.");
-        } else {
-            alert("An error occurred. Please try again.");
+        // Handle successful prediction
+        if (response.data && response.data.prediction) {
+            setResult(response.data);
+            console.log("Prediction completed successfully!");
+            
+            // Save to Firebase
+            await addDoc(collection(db, "predictions"), {
+                ...form,
+                prediction: response.data.prediction,
+                probability: response.data.probability,
+                timestamp: serverTimestamp()
+            });
         }
+        
+    } catch (error) {
+        console.error("Prediction failed:", error.message);
+        alert("Unable to make prediction. Please try again.");
     } finally {
         setIsLoading(false);
     }
