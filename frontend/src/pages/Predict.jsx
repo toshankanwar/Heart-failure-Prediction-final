@@ -40,7 +40,7 @@ export default function Predict() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/predict", form);
+      const res = await axios.post("https://hfailure.onrender.com/predict", form);
       const predictionData = res.data;
       setResult(predictionData);
 
