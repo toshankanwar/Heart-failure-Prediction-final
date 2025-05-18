@@ -37,19 +37,20 @@ export default function Predict() {
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const res = await axios.post(
-            "https://hfailure-backend-1.onrender.com/predict", 
-            form,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                withCredentials: false
-            }
-        );
+        const res = await axios({
+            method: 'post',
+            url: 'https://hfailure-backend-1.onrender.com/predict',
+            data: form,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            withCredentials: false
+        });
+        
         const predictionData = res.data;
         setResult(predictionData);
 
@@ -61,10 +62,22 @@ export default function Predict() {
         });
     } catch (err) {
         console.error("Prediction error:", err);
-        alert("Prediction failed. Please try again later.");
+        if (err.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.error("Error response:", err.response.data);
+            alert(`Prediction failed: ${err.response.data.error || 'Unknown error'}`);
+        } else if (err.request) {
+            // The request was made but no response was received
+            console.error("No response received:", err.request);
+            alert("No response from server. Please try again later.");
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error("Error setting up request:", err.message);
+            alert("Error setting up request. Please try again later.");
+        }
     }
 };
-
   const fieldInfo = {
     Age: {
       description: "Patient's age in years",
