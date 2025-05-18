@@ -42,15 +42,8 @@ const handleSubmit = async (e) => {
     console.log("Processing prediction request...");
     
     try {
-         // const response = await axios.post(`${process.env.REACT_APP_API_URL}/predict`, form);
-        const response = await axios.post(
-            'https://hfailure-backend-2.onrender.com/predict',
-            form,
-            {
-                headers: { 'Content-Type': 'application/json' }
-            }
-        );
-        
+       const response = await axios.post(`${process.env.REACT_APP_API_URL}/predict`, form);
+  
         
         if (response.data && response.data.prediction) {
             setResult(response.data);
