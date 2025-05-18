@@ -37,46 +37,48 @@ export default function Predict() {
     setForm({ ...form, [name]: value });
   };
 
- const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-        const res = await axios({
-            method: 'post',
-            url: 'https://hfailure-backend-1.onrender.com/predict',
-            data: form,
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            withCredentials: false
-        });
-        
-        const predictionData = res.data;
-        setResult(predictionData);
+ const API_URL = 'https://hfailure-backend-1.onrender.com';
 
-        await addDoc(collection(db, "predictions"), {
-            ...form,
-            prediction: predictionData.prediction,
-            probability: predictionData.probability,
-            timestamp: serverTimestamp(),
-        });
-    } catch (err) {
-        console.error("Prediction error:", err);
-        if (err.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            console.error("Error response:", err.response.data);
-            alert(`Prediction failed: ${err.response.data.error || 'Unknown error'}`);
-        } else if (err.request) {
-            // The request was made but no response was received
-            console.error("No response received:", err.request);
-            alert("No response from server. Please try again later.");
-        } else {
-            // Something happened in setting up the request that triggered an Error
-            console.error("Error setting up request:", err.message);
-            alert("Error setting up request. Please try again later.");
-        }
-    }
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+      const res = await axios({
+          method: 'post',
+          url: `${API_URL}/predict`,
+          data: form,
+          headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+          },
+          withCredentials: false
+      });
+      
+      const predictionData = res.data;
+      setResult(predictionData);
+
+      await addDoc(collection(db, "predictions"), {
+          ...form,
+          prediction: predictionData.prediction,
+          probability: predictionData.probability,
+          timestamp: serverTimestamp(),
+      });
+  } catch (err) {
+      console.error("Prediction error:", err);
+      if (err.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.error("Error response:", err.response.data);
+          alert(`Prediction failed: ${err.response.data.error || 'Unknown error'}\nStatus: ${err.response.status}`);
+      } else if (err.request) {
+          // The request was made but no response was received
+          console.error("No response received:", err.request);
+          alert("No response from server. Please try again later.");
+      } else {
+          // Something happened in setting up the request that triggered an Error
+          console.error("Error setting up request:", err.message);
+          alert("Error setting up request. Please try again later.");
+      }
+  }
 };
   const fieldInfo = {
     Age: {
