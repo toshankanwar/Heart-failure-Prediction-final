@@ -40,20 +40,30 @@ export default function Predict() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://hfailure-backend-1.onrender.com/predict", form);
-      const predictionData = res.data;
-      setResult(predictionData);
+        const res = await axios.post(
+            "https://hfailure-backend-1.onrender.com/predict", 
+            form,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                withCredentials: false
+            }
+        );
+        const predictionData = res.data;
+        setResult(predictionData);
 
-      await addDoc(collection(db, "predictions"), {
-        ...form,
-        prediction: predictionData.prediction,
-        probability: predictionData.probability,
-        timestamp: serverTimestamp(),
-      });
+        await addDoc(collection(db, "predictions"), {
+            ...form,
+            prediction: predictionData.prediction,
+            probability: predictionData.probability,
+            timestamp: serverTimestamp(),
+        });
     } catch (err) {
-      alert("Prediction failed. Please check your backend.");
+        console.error("Prediction error:", err);
+        alert("Prediction failed. Please try again later.");
     }
-  };
+};
 
   const fieldInfo = {
     Age: {
