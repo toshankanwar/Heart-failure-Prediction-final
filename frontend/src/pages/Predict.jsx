@@ -39,13 +39,13 @@ export default function Predict() {
 
 
 
- const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting form data:", form);
     
     try {
-        // Show loading state
-        setIsLoading(true);  // Add this state variable
+        setIsLoading(true);  // Show loading state
+        setError(null);      // Clear any previous errors
         
         const response = await axios({
             method: 'post',
@@ -55,13 +55,8 @@ export default function Predict() {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            timeout: 120000, // Increase timeout to 60 seconds
-            withCredentials: false,
-            // Add retry logic
-            retry: 3,
-            retryDelay: (retryCount) => {
-                return retryCount * 2000; // Wait 2s, 4s, 6s between retries
-            }
+            // Remove timeout completely since we're handling long predictions
+            withCredentials: false
         });
         
         console.log("Server response:", response.data);
@@ -78,22 +73,19 @@ export default function Predict() {
         
     } catch (err) {
         console.error("API Error:", err);
+        setError(err.message);
         
-        if (err.code === 'ECONNABORTED') {
-            alert("The server is taking longer than expected to respond. Please try again in a few moments.");
-        } else if (err.response) {
-            const errorMessage = err.response.data.error || 'Unknown server error';
-            alert(`The server returned an error: ${errorMessage}`);
+        if (err.response) {
+            alert(`Server error: ${err.response.data.error || 'Unknown error'}`);
         } else if (err.request) {
-            alert("Unable to reach the server. Please check your internet connection and try again.");
+            alert("Connection issue. Please try again.");
         } else {
-            alert("An unexpected error occurred. Please try again.");
+            alert("An error occurred. Please try again.");
         }
     } finally {
-        setIsLoading(false);  // Clear loading state
+        setIsLoading(false);
     }
 };
-
   
   const fieldInfo = {
     Age: {
