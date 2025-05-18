@@ -44,7 +44,7 @@ const handleSubmit = async (e) => {
     
     try {
         // Show loading state
-        setIsLoading(true);
+        
         
         // Make API call
         const response = await axios({
@@ -73,9 +73,7 @@ const handleSubmit = async (e) => {
     } catch (error) {
         console.error("Prediction failed:", error.message);
         alert("Unable to make prediction. Please try again.");
-    } finally {
-        setIsLoading(false);
-    }
+    }    
 };
   
   const fieldInfo = {
