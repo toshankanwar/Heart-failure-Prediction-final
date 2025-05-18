@@ -43,22 +43,19 @@ const handleSubmit = async (e) => {
     console.log("Processing prediction request...");
     
     try {
-        // Show loading state
-        
-        
-        // Make API call
         const response = await axios({
             method: 'post',
             url: `${process.env.REACT_APP_API_URL}/predict`,
-            data: form
+            data: form,
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
         
-        // Handle successful prediction
         if (response.data && response.data.prediction) {
             setResult(response.data);
             console.log("Prediction completed successfully!");
             
-            // Save to Firebase
             await addDoc(collection(db, "predictions"), {
                 ...form,
                 prediction: response.data.prediction,
