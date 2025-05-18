@@ -3,7 +3,8 @@
 
 A fully responsive, theme-switching, animated web application to **predict heart disease risk** using a trained deep learning model. Built with **React.js** (frontend) and **Flask** (backend), this app provides a smooth user experience across all devices.
 
-![image](https://github.com/user-attachments/assets/a73a7fc8-b322-4c81-8f1d-9b2f3a9177da)
+![image](https://github.com/user-attachments/assets/520a587d-9283-44e6-8d34-7456083631f2)
+
 
 
 ---
