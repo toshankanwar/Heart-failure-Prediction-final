@@ -1,0 +1,245 @@
+/* Root variables for light/dark themes */
+:root {
+  /* Light theme (default) */
+  --footer-bg-light: #ffffff;
+  --footer-text-light: #2d3748;
+  --footer-muted-light: #4a5568;
+  --footer-link-light: #f56565;
+  --footer-hover-light: #e53e3e;
+  --footer-border-light: rgba(74, 85, 104, 0.2);
+  
+  /* Dark theme */
+  --footer-bg-dark: #1a202c;
+  --footer-text-dark: #e2e8f0;
+  --footer-muted-dark: #cbd5e1;
+  --footer-link-dark: #f56565;
+  --footer-hover-dark: #fc8181;
+  --footer-border-dark: rgba(226, 232, 240, 0.1);
+  
+  /* Common */
+  --transition-speed: 0.3s;
+  --footer-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer container */
+.footer-container {
+  background-color: var(--footer-bg-light);
+  color: var(--footer-text-light);
+  padding: 4rem 2rem 2rem;
+  position: relative;
+  width: 100%;
+  margin-top: auto;
+  box-shadow: var(--footer-shadow);
+}
+
+.footer-container.dark {
+  background-color: var(--footer-bg-dark);
+  color: var(--footer-text-dark);
+}
+
+/* Content wrapper */
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Sections grid */
+.footer-sections {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+/* Footer logo */
+.footer-logo {
+  margin-right: 0.5rem;
+  font-size: 1.25rem;
+}
+
+/* Individual section styling */
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Section titles */
+.footer-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Section description */
+.footer-description {
+  color: var(--footer-muted-light);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+.dark .footer-description {
+  color: var(--footer-muted-dark);
+}
+
+/* Navigation menu in footer */
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Footer links */
+.footer-link {
+  color: var(--footer-muted-light);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  transition: all var(--transition-speed);
+  width: fit-content;
+  position: relative;
+}
+
+.dark .footer-link {
+  color: var(--footer-muted-dark);
+}
+
+.footer-link:hover {
+  color: var(--footer-link-light);
+  transform: translateX(4px);
+}
+
+.dark .footer-link:hover {
+  color: var(--footer-link-dark);
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--footer-link-light);
+  transition: width var(--transition-speed);
+}
+
+.dark .footer-link::after {
+  background-color: var(--footer-link-dark);
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+/* Bottom section with credits */
+.footer-bottom {
+  padding-top: 2rem;
+  text-align: center;
+}
+
+/* Separator line */
+.footer-separator {
+  height: 1px;
+  background-color: var(--footer-border-light);
+  margin-bottom: 2rem;
+}
+
+.dark .footer-separator {
+  background-color: var(--footer-border-dark);
+}
+
+/* Credits section */
+.footer-credit {
+  color: var(--footer-muted-light);
+  font-size: 0.9375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.dark .footer-credit {
+  color: var(--footer-muted-dark);
+}
+
+/* Developer link styling */
+.dev-link {
+  color: var(--footer-link-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-speed);
+  position: relative;
+}
+
+.dark .dev-link {
+  color: var(--footer-link-dark);
+}
+
+.dev-link:hover {
+  color: var(--footer-hover-light);
+}
+
+.dark .dev-link:hover {
+  color: var(--footer-hover-dark);
+}
+
+.dev-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--footer-hover-light);
+  transition: width var(--transition-speed);
+}
+
+.dark .dev-link::after {
+  background-color: var(--footer-hover-dark);
+}
+
+.dev-link:hover::after {
+  width: 100%;
+}
+
+/* Heart icon animation */
+.heart-icon {
+  display: inline-block;
+  animation: heartBeat 1.5s ease infinite;
+}
+
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.3); }
+  70% { transform: scale(1); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .footer-sections {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-container {
+    padding: 3rem 1.5rem 1.5rem;
+  }
+
+  .footer-description {
+    max-width: 100%;
+  }
+
+  .footer-bottom {
+    padding-top: 1.5rem;
+  }
+
+  .footer-credit {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
