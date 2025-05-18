@@ -44,8 +44,8 @@ const handleSubmit = async (e) => {
     console.log("Submitting form data:", form);
     
     try {
-        setIsLoading(true);  // Show loading state
-        setError(null);      // Clear any previous errors
+        setIsLoading(true);  
+        setError(null);      
         
         const response = await axios({
             method: 'post',
