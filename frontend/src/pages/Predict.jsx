@@ -37,18 +37,20 @@ export default function Predict() {
     setForm({ ...form, [name]: value });
   };
 
-
 const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Processing prediction request...");
     
     try {
+        // Log the form data to check its structure
+        console.log("Form data being sent:", form);
+        
         const response = await axios({
             method: 'post',
             url: `${process.env.REACT_APP_API_URL}/predict`,
             data: form,
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json'  // Add this back
             }
         });
         
@@ -65,11 +67,11 @@ const handleSubmit = async (e) => {
         }
         
     } catch (error) {
-        console.error("Prediction failed:", error.message);
+        console.error("Prediction failed:", error);  // Log the full error
+        console.error("Error response:", error.response?.data);  // Log server error message
         alert("Unable to make prediction. Please try again.");
     }    
 };
-  
   const fieldInfo = {
     Age: {
       description: "Patient's age in years",
