@@ -38,7 +38,7 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 100 }}
-        className={`navbar ${darkMode ? 'dark' : 'light'} ${scrolled ? 'scrolled' : ''}`}
+        className={`navbar ${scrolled ? 'scrolled' : ''}`}
       >
         <div className="navbar-container">
           <Link to="/" className="navbar-logo">
