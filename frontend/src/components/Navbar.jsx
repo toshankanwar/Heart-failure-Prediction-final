@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useTheme } from '../theme/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import './Navbar.css';
 
 export default function Navbar() {
-  const { darkMode } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
