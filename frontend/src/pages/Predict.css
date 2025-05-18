@@ -1,0 +1,523 @@
+:root {
+    --primary-red: #f56565;
+    --primary-red-dark: #e53e3e;
+    --primary-red-light: #fc8181;
+    --background-light: #ffffff;
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+    --danger-red: #e53e3e;
+    --success-green: #48bb78;
+    --warning-yellow: #ecc94b;
+    --navbar-height: 64px; /* Add this line - adjust the value to match your navbar height */
+  }
+  
+  /* Update the predict-container styles */
+  .predict-container {
+    min-height: calc(100vh - var(--navbar-height)); /* Subtract navbar height */
+    background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+    padding: 2rem;
+    margin-top: var(--navbar-height); /* Add this line */
+    position: relative; /* Add this line */
+  }
+  
+  /* Update the predict-content styles */
+  .predict-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    position: relative;
+    padding: 1rem; /* Add some padding */
+  }
+  /* Form Section Styles */
+  .prediction-form-section {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(245, 101, 101, 0.1);
+    padding: 2rem;
+  }
+  
+  .form-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .heart-icon {
+    font-size: 2.5rem;
+    animation: pulse 2s infinite;
+  }
+  
+  .prediction-form {
+    display: grid;
+    gap: 1.5rem;
+    position: relative; /* Add this */
+  }
+  .predict-button {
+    background: var(--primary-red);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    width: 100%;
+    margin-bottom: 2rem; /* Add this */
+  }
+  
+  .form-field {
+    position: relative;
+  }
+  
+  .field-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+  
+  .info-icon {
+    font-size: 0.875rem;
+    opacity: 0.7;
+    cursor: help;
+  }
+  
+  .field-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid rgba(245, 101, 101, 0.2);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .field-input:focus {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.1);
+    outline: none;
+  }
+  
+  .field-info {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    border: 1px solid rgba(245, 101, 101, 0.2);
+  }
+  
+  .info-range {
+    color: var(--primary-red);
+    font-weight: 600;
+    margin-top: 0.5rem;
+  }
+  
+  .info-critical {
+    color: var(--danger-red);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+  
+  .predict-button {
+    background: var(--primary-red);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  
+  .predict-button:hover {
+    background: var(--primary-red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(245, 101, 101, 0.2);
+  }
+  
+  /* Prediction Result Styles */
+  .prediction-result {
+    position: relative;
+    margin-top: 0; /* Change from 2rem to 0 */
+    padding: 2rem;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(245, 101, 101, 0.1);
+    width: 100%; /* Add this */
+  }
+  
+  .high-risk {
+    border: 2px solid var(--danger-red);
+  }
+  
+  .low-risk {
+    border: 2px solid var(--success-green);
+  }
+  
+  .result-title {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+  
+  .probability-bar {
+    height: 10px;
+    background: #edf2f7;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  
+  .probability-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--success-green), var(--danger-red));
+    border-radius: 5px;
+  }
+  
+  .probability-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  /* Health Suggestions Styles */
+  .health-suggestions {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(245, 101, 101, 0.2);
+  }
+  
+  
+  
+  .suggestion-category {
+    margin-top: 1.5rem;
+    background: #f8f9fa; /* Add light background */
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .suggestion-category h5 {
+    color: var(--primary-red);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+  
+  .suggestion-category ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .suggestion-category li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-primary); /* Change this from white to text-primary color */
+    font-size: 0.95rem; /* Add this for better readability */
+    line-height: 1.5; /* Add this for better spacing */
+    margin-bottom: 0.5rem; /* Add space between items */
+  }
+  .suggestion-category motion.li {
+    color: var(--text-primary); /* Ensure text color is set */
+    display: block; /* Ensure proper display */
+  }
+  .suggestion-category li:hover {
+    transform: translateX(5px);
+    transition: transform 0.2s ease;
+  }
+  .suggestion-category li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--primary-red);
+    font-weight: bold;
+  }
+  
+  /* Information Panel Styles */
+  .information-panel {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(245, 101, 101, 0.1);
+    padding: 2rem;
+  }
+  
+  .info-container {
+    height: 100%;
+    overflow-y: auto;
+  }
+  
+  .info-title {
+    font-size: 1.75rem;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+  }
+  
+  .indicators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .indicator-card {
+    padding: 1rem;
+    border-radius: 10px;
+    background: #f7fafc;
+    border: 1px solid rgba(245, 101, 101, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .indicator-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(245, 101, 101, 0.1);
+  }
+  
+  .indicator-card h5 {
+    color: var(--primary-red);
+    margin-bottom: 0.5rem;
+  }
+  
+  .quick-tips {
+    background: #fff5f5;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-top: 2rem;
+  }
+  
+  .quick-tips h4 {
+    color: var(--primary-red);
+    margin-bottom: 1rem;
+  }
+  
+  .quick-tips ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .quick-tips li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  
+  .quick-tips li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-red);
+  }
+  
+  /* Animations */
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .predict-content {
+      grid-template-columns: 1fr;
+      padding: 1rem;
+    }
+  
+    .predict-container {
+      padding: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .predict-container {
+      margin-top: calc(var(--navbar-height) - 1rem); /* Adjust margin for mobile */
+      padding: 0.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .prediction-form-section,
+    .information-panel {
+      padding: 1rem;
+    }
+  
+    .hero-title {
+      font-size: 1.75rem;
+    }
+  }
+  /* Add to your existing Predict.css */
+
+/* Risk Overview Styles */
+.risk-overview {
+    margin-bottom: 3rem;
+  }
+  
+  .risk-levels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .risk-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .risk-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .risk-icon {
+    font-size: 1.5rem;
+  }
+  
+  .risk-card.low {
+    border-left: 4px solid var(--success-green);
+  }
+  
+  .risk-card.medium {
+    border-left: 4px solid var(--warning-yellow);
+  }
+  
+  .risk-card.high {
+    border-left: 4px solid var(--danger-red);
+  }
+  
+  .risk-indicators {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+  }
+  
+  .risk-indicators li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+  
+  /* Parameter Details Styles */
+  .parameter-details {
+    margin-bottom: 3rem;
+  }
+  
+  .parameters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .parameter-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .parameter-ranges {
+    margin-top: 1rem;
+  }
+  
+  .range-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .range-label {
+    font-weight: 500;
+  }
+  
+  .range-item.normal .range-value {
+    color: var(--success-green);
+  }
+  
+  .range-item.elevated .range-value {
+    color: var(--warning-yellow);
+  }
+  
+  .range-item.high .range-value {
+    color: var(--danger-red);
+  }
+  
+  /* Prevention Tips Styles */
+  .prevention-tips {
+    margin-top: 3rem;
+  }
+  
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .tip-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    text-align: center;
+  }
+  
+  .tip-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  
+  .tip-card ul {
+    text-align: left;
+    margin-top: 1rem;
+  }
+  
+  .tip-card li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  
+  .tip-card li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-red);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .risk-levels,
+    .parameters-grid,
+    .tips-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .parameter-card,
+    .tip-card {
+      padding: 1rem;
+    }
+  }
