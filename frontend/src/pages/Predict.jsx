@@ -50,10 +50,7 @@ const handleSubmit = async (e) => {
         const response = await axios({
             method: 'post',
             url: `${process.env.REACT_APP_API_URL}/predict`,
-            data: form,
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            data: form
         });
         
         // Handle successful prediction
