@@ -253,7 +253,7 @@ export default function About() {
           >
             <h2 className="section-title">Project Resources</h2>
             <div className="resource-grid">
-              <a href="https://github.com/toshankanwar/Heart-Failure-Prediction/tree/main/development/frontend" 
+              <a href="https://github.com/toshankanwar/Heart-failure-Prediction-final/tree/main/frontend" 
                 className="resource-card"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -262,7 +262,7 @@ export default function About() {
                 <h3>Frontend Repository</h3>
                 <p>React.js implementation with modern UI components</p>
               </a>
-              <a href="https://github.com/toshankanwar/Heart-Failure-Prediction/tree/main/development/backend" 
+              <a href="https://github.com/toshankanwar/Heart-failure-Prediction-final/tree/main/backend" 
                 className="resource-card"
                 target="_blank"
                 rel="noopener noreferrer"
