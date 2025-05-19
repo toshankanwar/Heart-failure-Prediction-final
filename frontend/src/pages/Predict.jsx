@@ -43,7 +43,7 @@ export default function Predict() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/predict", form);
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/predict`, form);
       const predictionData = res.data;
       setResult(predictionData);
 
