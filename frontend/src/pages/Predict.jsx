@@ -86,12 +86,12 @@ export default function Predict() {
     },
     RestingBP: {
       description: "Resting blood pressure (mm Hg)",
-      range: "Normal: 90-120",
+      range: "Normal: 90-120 mmHg",
       critical: "Above 140 is considered high",
     },
     Cholesterol: {
       description: "Serum cholesterol (mg/dl)",
-      range: "Normal: 125-200",
+      range: "Normal: 125-200 mg/dl",
       critical: "Above 240 is considered high risk",
     },
     FastingBS: {
@@ -104,12 +104,12 @@ export default function Predict() {
     },
     MaxHR: {
       description: "Maximum heart rate achieved",
-      range: "Normal: 60-220",
+      range: "Typically: 60-220 bpm",
       formula: "220 - age (approximate max)",
     },
     Oldpeak: {
       description: "ST depression induced by exercise relative to rest",
-      range: "Normal: 0-6.2",
+      range: "Typically: 0-6.2 cm",
       critical: "Higher values indicate higher risk",
     },
   };
