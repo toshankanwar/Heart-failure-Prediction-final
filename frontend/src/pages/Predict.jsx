@@ -43,7 +43,7 @@ export default function Predict() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await axios.post("https://hfailure.onrender.com/predict", form);
+      const res = await axios.post("https://trial-hfailure.onrender.com/predict", form);
       const predictionData = res.data;
       setResult(predictionData);
 
