@@ -242,6 +242,7 @@ export default function Predict() {
                         onChange={handleChange}
                         className="field-input"
                         required
+                        placeholder={fieldInfo[key]?.range || `Enter ${key}`}
                       />
                     )}
 
@@ -267,22 +268,22 @@ export default function Predict() {
                   </div>
                 ))}
 
-<motion.button
-  type="submit"
-  className="predict-button"
-  whileHover={{ scale: 1.02 }}
-  whileTap={{ scale: 0.98 }}
-  disabled={isLoading}
->
-  {isLoading ? (
-    <div className="button-content">
-      <div className="loading-spinner"></div>
-      <span>Predicting...</span>
-    </div>
-  ) : (
-    "Get Prediction"
-  )}
-</motion.button>
+                <motion.button
+                  type="submit"
+                  className="predict-button"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <div className="button-content">
+                      <div className="loading-spinner"></div>
+                      <span>Predicting...</span>
+                    </div>
+                  ) : (
+                    "Get Prediction"
+                  )}
+                </motion.button>
               </form>
               {result && (
                 <motion.div
