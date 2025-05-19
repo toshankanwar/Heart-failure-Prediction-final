@@ -41,7 +41,7 @@ const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
-        const API_URL = process.env.REACT_APP_API_URL || 'https://hfailure-backend-2.onrender.com';
+        const API_URL = process.env.REACT_APP_API_URL ;
         
         const response = await axios.post(
             `${API_URL}/predict`,
