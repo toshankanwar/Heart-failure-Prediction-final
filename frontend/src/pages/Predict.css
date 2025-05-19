@@ -73,7 +73,33 @@
     transition: all 0.3s ease;
     margin-top: 1rem;
     width: 100%;
-    margin-bottom: 2rem; /* Add this */
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    position: relative; /* Add this */
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .predict-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  .loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
   }
   
   .form-field {
@@ -147,6 +173,13 @@
     margin-top: 1rem;
     width: 100%;
   }
+  .button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
   
   .predict-button:hover {
     background: var(--primary-red-dark);
