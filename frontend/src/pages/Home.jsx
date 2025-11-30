@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 import './Home.css';
 
 export default function Home() {
-  const { scrollY } = useScroll();
- 
-
-  // Scroll animations
-  const y = useTransform(scrollY, [0, 300], [0, -50]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
   const statistics = [
     { value: "89%", label: "Prediction Accuracy", icon: "🎯" },
     { value: "10+", label: "Predictions Made", icon: "📊" },
