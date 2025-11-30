@@ -27,12 +27,6 @@
     box-shadow: var(--box-shadow);
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-  }
-  
-
-  
-
-  .navbar-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: var(--navbar-padding);
@@ -141,9 +135,6 @@
     z-index: 1000;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
   }
-  
- 
-  
   .mobile-overlay {
     position: fixed;
     top: 0;
