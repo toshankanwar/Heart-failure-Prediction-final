@@ -6,7 +6,7 @@ import './Home.css';
 
 export default function Home() {
   const { scrollY } = useScroll();
-  const [isVisible, setIsVisible] = useState(false);
+ 
 
   // Scroll animations
   const y = useTransform(scrollY, [0, 300], [0, -50]);
@@ -22,28 +22,6 @@ export default function Home() {
     { value: "24/7", label: "Available Support", icon: "💪" }
   ];
 
-  const features = [
-    {
-      icon: "🫀",
-      title: "Advanced ML Model",
-      description: "Our state-of-the-art machine learning model provides accurate heart failure predictions based on clinical parameters."
-    },
-    {
-      icon: "📈",
-      title: "Real-time Analysis",
-      description: "Get instant percentage-based risk assessment and detailed analysis of your heart health factors."
-    },
-    {
-      icon: "🔒",
-      title: "Secure & Private",
-      description: "Your health data is encrypted and protected with industry-standard security protocols."
-    },
-    {
-      icon: "📱",
-      title: "Easy to Use",
-      description: "Simple interface to input your health metrics and get immediate prediction results."
-    }
-  ];
 
   return (
     <>
