@@ -1,16 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { useTheme } from '../theme/ThemeContext'; // Make sure this path matches your theme context
+import { motion } from 'framer-motion'; // Make sure this path matches your theme context
 import './Footer.css';
 
 export default function Footer() {
-  const { darkMode } = useTheme();
+ 
   const currentYear = new Date().getFullYear();
 
   return (
     <motion.footer 
-      className={`footer-container ${darkMode ? 'dark' : 'light'}`}
+      className={"footer-container"}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -52,12 +51,12 @@ export default function Footer() {
             © {currentYear} Heart Predictor. Made with{' '}
             <span className="heart-icon" aria-label="love">❤️</span> by{' '}
             <a 
-              href="https://toshankanwar.website/" 
+              href="https://toshankanwar.in" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="dev-link"
             >
-              Toshan Kanwar, Shiva Kumar Nagesh. Yogesh Nag
+              Toshan Kanwar
             </a>
           </p>
         </div>

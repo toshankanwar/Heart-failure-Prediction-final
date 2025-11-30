@@ -213,7 +213,7 @@ export default function Contact() {
                   <span className="info-icon">✉️</span>
                   <div>
                     <h4>Email</h4>
-                    <p>contact@toshankanwar.website</p>
+                    <p>contact@toshankanwar.in</p>
                   </div>
                 </div>
               </div>

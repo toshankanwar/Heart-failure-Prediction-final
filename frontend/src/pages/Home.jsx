@@ -77,14 +77,6 @@ export default function Home() {
                 <span className="hero-heart">❤️</span>
                 Heart Failure
                 <span className="gradient-text">Prediction</span>
-                <motion.div 
-                  className="accuracy-badge"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.5, type: "spring" }}
-                >
-                  89% Accurate
-                </motion.div>
               </h1>
 
               <p className="hero-subtitle">

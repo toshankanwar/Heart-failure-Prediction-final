@@ -107,7 +107,7 @@ Sends input data to backend and returns prediction:
 }
 
 ### 🌐 Live Demo of Frontend
-https://heart-failure.toshankanwar.website/
+https://heart-failure.toshankanwar.in/
 
 Unfortunately due to some money related issues i cant host backend at this moment if you have any suggestion please suggest me 
 
@@ -118,4 +118,4 @@ This project is licensed under the MIT License.
 Pull requests are welcome! For major changes, please open an issue first.
 
 ### Made with ❤️ by [Toshan kanwar]
-Mail for queries contact@toshankanwar.website
+Mail for queries contact@toshankanwar.in

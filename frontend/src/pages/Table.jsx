@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { db } from "../firebase";
 import { collection, query, orderBy, limit, startAfter, getDocs } from "firebase/firestore";
 import { Helmet } from "react-helmet";
@@ -40,7 +40,8 @@ export default function Table() {
     { key: "timestamp", label: "Timestamp" }
   ];
 
-  const fetchPredictions = async (isNewSort = false) => {
+  // ✅ Wrapped in useCallback to fix dependency warning
+  const fetchPredictions = useCallback(async (isNewSort = false) => {
     try {
       setLoading(true);
       let q = query(
@@ -74,11 +75,11 @@ export default function Table() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [sortField, sortDirection, lastDoc]); // ✅ Added dependencies
 
   useEffect(() => {
     fetchPredictions(true);
-  }, [sortField, sortDirection]);
+  }, [fetchPredictions]); // ✅ Now includes fetchPredictions
 
   const handleSortChange = (event) => {
     const [newField, newDirection] = event.target.value.split("-");
