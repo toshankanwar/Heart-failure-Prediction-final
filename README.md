@@ -107,7 +107,7 @@ Sends input data to backend and returns prediction:
 }
 
 ### 🌐 Live Demo of Frontend
-https://heart-failure.toshankanwar.in/
+https://heart.toshankanwar.in/
 
 Unfortunately due to some money related issues i cant host backend at this moment if you have any suggestion please suggest me 
 

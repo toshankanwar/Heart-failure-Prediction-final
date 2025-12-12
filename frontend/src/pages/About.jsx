@@ -295,7 +295,7 @@ export default function About() {
                   <span className="contact-icon">📧</span>
                   <h3>Email</h3>
                   <a href="mailto:contact@toshankanwar.website">
-                    contact@toshankanwar.website
+                    contact@toshankanwar.in
                   </a>
                 </div>
                 <div className="contact-item">
